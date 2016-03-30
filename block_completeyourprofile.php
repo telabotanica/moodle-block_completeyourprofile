@@ -84,7 +84,7 @@ class block_completeyourprofile extends block_base {
 		}
 
 		// should we consider required fields only ?
-		$where1 = "visible > 1";
+		$where1 = "visible > 0";
 		if (true) { // @TODO config option
 			$where1 .= " AND required = 1";
 		}
