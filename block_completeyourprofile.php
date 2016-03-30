@@ -96,7 +96,7 @@ class block_completeyourprofile extends block_base {
 			// get desired fields IDs
 			$ftfIds = array();
 			foreach ($fieldsToFill as $ftf) {
-				$ftfIds[] = $ftf['id'];
+				$ftfIds[] = $ftf->id;
 			}
 			// check if those fields are filled in the current user's profile
 			$where2 = "userid = " . $USER->id . " AND $emptyFieldClause AND fieldid IN(" . implode(',', $ftfIds) . ")";
@@ -109,8 +109,6 @@ class block_completeyourprofile extends block_base {
 
 		// so what now ?
 		if (! $profileIsComplete) {
-			http://mooc.tela-botanica.org/moodle/user/editadvanced.php?id=2
-				
 			$editProfileUrl = new moodle_url('/user/editadvanced.php', array('id' => $USER->id));
 			$str .= "<p>";
 			$str .= get_string('complete_your_profile', 'block_completeyourprofile');
