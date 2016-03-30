@@ -109,7 +109,7 @@ class block_completeyourprofile extends block_base {
 
 		// so what now ?
 		if (! $profileIsComplete) {
-			$editProfileUrl = new moodle_url('/user/editadvanced.php', array('id' => $USER->id));
+			$editProfileUrl = new moodle_url('/user/edit.php', array('id' => $USER->id));
 			$str .= "<p>";
 			$str .= get_string('complete_your_profile', 'block_completeyourprofile');
 			$str .= "</p>";
