@@ -49,7 +49,7 @@ class block_completeyourprofile_edit_form extends block_edit_form {
         $mform->setType('config_emptyasnull', PARAM_RAW);
 
         // should we consider required fields only ?
-        $mform->addElement('advcheckbox', 'config_requiredonly', get_string('consider_empty_as_null', 'block_completeyourprofile'), '', null, array(0, 1));
+        $mform->addElement('advcheckbox', 'config_requiredonly', get_string('consider_required_fields_only', 'block_completeyourprofile'), '', null, array(0, 1));
         $mform->setDefault('config_requiredonly', 0);
         $mform->setType('config_requiredonly', PARAM_RAW);
     }

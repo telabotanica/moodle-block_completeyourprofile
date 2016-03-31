@@ -34,3 +34,5 @@ $string['pluginname'] = 'Complete your profile block';
 $string['block_completeyourprofile_title'] = 'Complete your profile';
 $string['complete_your_profile'] = "Than you for taking a little time to complete your profile";
 $string['edit_profile'] = "Let's go !";
+$string['consider_empty_as_null'] = "Consider the field as not filled in case of an empty value ('')";
+$string['consider_required_fields_only'] = "Only consider fields marked as required";
