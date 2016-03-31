@@ -79,13 +79,13 @@ class block_completeyourprofile extends block_base {
 
 		// should we consider '' (empty string) as NULL (not filled) ?
 		$emptyFieldClause = "data IS NOT NULL";
-		if (true) { // @TODO config option
+		if (! empty($this->config->emptyasnull) &&  ($this->config->emptyasnull == 1)){
 			$emptyFieldClause .= " AND data != ''";
 		}
 
 		// should we consider required fields only ?
 		$where1 = "visible > 0";
-		if (true) { // @TODO config option
+		if (! empty($this->config->requiredonly) &&  ($this->config->requiredonly == 1)){
 			$where1 .= " AND required = 1";
 		}
 

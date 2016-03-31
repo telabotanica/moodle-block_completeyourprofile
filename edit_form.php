@@ -29,8 +29,28 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$plugin->component = 'block_completeyourprofile';
-$plugin->version = 2016033101;
-$plugin->requires = 2014111000; // Moodle v2.8
-$plugin->maturity = MATURITY_BETA;
-$plugin->release = "0.1";
+/**
+ * Block definition
+ *
+ * @package    block_completeyourprofile
+ * @copyright  2016 Mathias Chouet, Tela Botanica
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class block_completeyourprofile_edit_form extends block_edit_form {
+
+    protected function specific_definition($mform) {
+
+        // Section header title according to language file.
+        $mform->addElement('header', 'configheader', get_string('blocksettings', 'block'));
+
+        // should we consider '' (empty string) as NULL (not filled) ?
+        $mform->addElement('advcheckbox', 'config_emptyasnull', get_string('consider_empty_as_null', 'block_completeyourprofile'), '', null, array(0, 1));
+        $mform->setDefault('config_emptyasnull', 0);
+        $mform->setType('config_emptyasnull', PARAM_RAW);
+
+        // should we consider required fields only ?
+        $mform->addElement('advcheckbox', 'config_requiredonly', get_string('consider_empty_as_null', 'block_completeyourprofile'), '', null, array(0, 1));
+        $mform->setDefault('config_requiredonly', 0);
+        $mform->setType('config_requiredonly', PARAM_RAW);
+    }
+}
