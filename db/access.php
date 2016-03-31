@@ -30,7 +30,7 @@
  */
 
 $capabilities = array(
-	'block/completeyourprofile:myaddinstance' => array(
+    'block/completeyourprofile:myaddinstance' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
