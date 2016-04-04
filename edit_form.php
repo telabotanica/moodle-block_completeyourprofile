@@ -58,7 +58,7 @@ class block_completeyourprofile_edit_form extends block_edit_form {
         $mform->setDefault('config_block_text', '');
         $mform->setType('config_block_text', PARAM_RAW);
 
-		$mform->addElement('text', 'config_button_text', get_string('config_button_text', 'block_completeyourprofile'));
+        $mform->addElement('text', 'config_button_text', get_string('config_button_text', 'block_completeyourprofile'));
         $mform->setDefault('config_button_text', '');
         $mform->setType('config_button_text', PARAM_RAW);
     }

@@ -111,19 +111,19 @@ class block_completeyourprofile extends block_base {
         if (! $profileIsComplete) {
             $editProfileUrl = new moodle_url('/user/edit.php', array('id' => $USER->id));
             $str .= "<p>";
-			if (! empty($this->config->block_text)){
-				$str .= $this->config->block_text;
-			} else {
-				$str .= get_string('complete_your_profile', 'block_completeyourprofile');
-			}
+            if (! empty($this->config->block_text)){
+                $str .= $this->config->block_text;
+            } else {
+                $str .= get_string('complete_your_profile', 'block_completeyourprofile');
+            }
             $str .= "</p>";
             $str .= "<br/>";
             $str .= '<a class="submit" href="' . $editProfileUrl->out() . '">';
-			if (! empty($this->config->button_text)){
-				$str .= $this->config->button_text;
-			} else {
-				$str .= get_string('edit_profile', 'block_completeyourprofile');
-			}
+            if (! empty($this->config->button_text)){
+                $str .= $this->config->button_text;
+            } else {
+                $str .= get_string('edit_profile', 'block_completeyourprofile');
+            }
             $str .= "</a>";
         } // else nothing, everything is OK
 
