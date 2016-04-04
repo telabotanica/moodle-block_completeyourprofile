@@ -52,5 +52,14 @@ class block_completeyourprofile_edit_form extends block_edit_form {
         $mform->addElement('advcheckbox', 'config_requiredonly', get_string('consider_required_fields_only', 'block_completeyourprofile'), '', null, array(0, 1));
         $mform->setDefault('config_requiredonly', 0);
         $mform->setType('config_requiredonly', PARAM_RAW);
+
+        // customize block and button texts
+        $mform->addElement('text', 'config_block_text', get_string('config_block_text', 'block_completeyourprofile'));
+        $mform->setDefault('config_block_text', '');
+        $mform->setType('config_block_text', PARAM_RAW);
+
+		$mform->addElement('text', 'config_button_text', get_string('config_button_text', 'block_completeyourprofile'));
+        $mform->setDefault('config_button_text', '');
+        $mform->setType('config_button_text', PARAM_RAW);
     }
 }

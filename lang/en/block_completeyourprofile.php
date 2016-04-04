@@ -32,7 +32,9 @@
 $string['completeyourprofile:addinstance'] = 'Add a Complete your profile block';
 $string['pluginname'] = 'Complete your profile block';
 $string['block_completeyourprofile_title'] = 'Complete your profile';
-$string['complete_your_profile'] = "Than you for taking a little time to complete your profile";
+$string['complete_your_profile'] = "Thank you for taking a little time to complete your profile";
 $string['edit_profile'] = "Let's go !";
 $string['consider_empty_as_null'] = "Consider the field as not filled in case of an empty value ('')";
 $string['consider_required_fields_only'] = "Only consider fields marked as required";
+$string['config_block_text'] = "Customize block text (defaults to \"Thank you for taking a little time to complete your profile\")";
+$string['config_button_text'] = "Customize the button text (defaults to \"Let's go !\")";

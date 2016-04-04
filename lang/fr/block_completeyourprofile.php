@@ -36,3 +36,5 @@ $string['complete_your_profile'] = "Merci de prendre quelques instants pour comp
 $string['edit_profile'] = "Allons-y !";
 $string['consider_empty_as_null'] = "Considérer que le champ n'est pas rempli si la valeur est vide ('')";
 $string['consider_required_fields_only'] = "Ne prendre en compte que les champs marqués comme requis";
+$string['config_block_text'] = "Changer le texte du bloc (par défaut: \"Merci de prendre quelques instants pour compléter votre profil\")";
+$string['config_button_text'] = "Changer le texte du bouton (par défaut: \"Allons-y !\")";
