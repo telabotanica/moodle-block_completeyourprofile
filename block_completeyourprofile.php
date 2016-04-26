@@ -69,18 +69,18 @@ class block_completeyourprofile extends block_base {
         global $USER;
         global $DB;
 
-        $profile_is_complete = true;
+        $profileiscomplete = true;
         $str = "";
 
         if ($USER->id == 1) { // Guest user
-            // No content will make the block disappear
+            // No content will make the block disappear.
             return '';
         }
 
         // Should we consider '' (empty string) as NULL (not filled) ?
-        $empty_field_clause = "data IS NOT NULL";
+        $emptyfieldclause = "data IS NOT NULL";
         if (! empty($this->config->emptyasnull) &&  ($this->config->emptyasnull == 1)) {
-            $empty_field_clause .= " AND data != ''";
+            $emptyfieldclause .= " AND data != ''";
         }
 
         // Should we consider required fields only ?
@@ -90,26 +90,26 @@ class block_completeyourprofile extends block_base {
         }
 
         // Which fields are supposed to be filled ?
-        $fields_to_fill = $DB->get_records_select('user_info_field', $where1, null, '', 'id');
+        $fieldstofill = $DB->get_records_select('user_info_field', $where1, null, '', 'id');
 
-        if (count($fields_to_fill) > 0) {
-            // Get desired fields IDs
-            $ftf_ids = array();
-            foreach ($fields_to_fill as $ftf) {
-                $ftf_ids[] = $ftf->id;
+        if (count($fieldstofill) > 0) {
+            // Get desired fields IDs.
+            $ftfids = array();
+            foreach ($fieldstofill as $ftf) {
+                $ftfids[] = $ftf->id;
             }
-            // Check if those fields are filled in the current user's profile
-            $where2 = "userid = " . $USER->id . " AND $empty_field_clause AND fieldid IN(" . implode(',', $ftf_ids) . ")";
-            $nb_filled_fields = $DB->count_records_select('user_info_data', $where2, null, 'COUNT(*)');
+            // Check if those fields are filled in the current user's profile.
+            $where2 = "userid = " . $USER->id . " AND $emptyfieldclause AND fieldid IN(" . implode(',', $ftfids) . ")";
+            $nbfilledfields = $DB->count_records_select('user_info_data', $where2, null, 'COUNT(*)');
             // Compare results
-            if ($nb_filled_fields < count($ftf_ids)) {
-                $profile_is_complete = false;
+            if ($nbfilledfields < count($ftfids)) {
+                $profileiscomplete = false;
             }
         }
 
         // So what now ?
-        if (! $profile_is_complete) {
-            $edit_profile_url = new moodle_url('/user/edit.php', array('id' => $USER->id));
+        if (! $profileiscomplete) {
+            $editprofileurl = new moodle_url('/user/edit.php', array('id' => $USER->id));
             $str .= "<p>";
             if (! empty($this->config->block_text)) {
                 $str .= $this->config->block_text;
@@ -118,7 +118,7 @@ class block_completeyourprofile extends block_base {
             }
             $str .= "</p>";
             $str .= "<br/>";
-            $str .= '<a class="submit" href="' . $edit_profile_url->out() . '">';
+            $str .= '<a class="submit" href="' . $editprofileurl->out() . '">';
             if (! empty($this->config->button_text)) {
                 $str .= $this->config->button_text;
             } else {

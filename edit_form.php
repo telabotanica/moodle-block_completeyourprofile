@@ -13,14 +13,14 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
- 
+
 /**
  * A simple block that encourages users to complete their profile
- * 
+ *
  * Checks if all required "profile fields" (admin > users > accouts > profile fields)
  * are filled for the current user; if not, suggests him/her to take a few minutes
  * to complete his/her profile
- * 
+ *
  * English and french versions included / versions anglaise et française incluses.
  *
  * @package    block_completeyourprofile
@@ -43,17 +43,21 @@ class block_completeyourprofile_edit_form extends block_edit_form {
         // Section header title according to language file.
         $mform->addElement('header', 'configheader', get_string('blocksettings', 'block'));
 
-        // should we consider '' (empty string) as NULL (not filled) ?
-        $mform->addElement('advcheckbox', 'config_emptyasnull', get_string('consider_empty_as_null', 'block_completeyourprofile'), '', null, array(0, 1));
+        // Should we consider '' (empty string) as NULL (not filled) ?
+        $mform->addElement('advcheckbox', 'config_emptyasnull',
+				get_string('consider_empty_as_null', 'block_completeyourprofile')
+				, '', null, array(0, 1));
         $mform->setDefault('config_emptyasnull', 0);
         $mform->setType('config_emptyasnull', PARAM_RAW);
 
-        // should we consider required fields only ?
-        $mform->addElement('advcheckbox', 'config_requiredonly', get_string('consider_required_fields_only', 'block_completeyourprofile'), '', null, array(0, 1));
+        // Should we consider required fields only ?
+        $mform->addElement('advcheckbox', 'config_requiredonly',
+				get_string('consider_required_fields_only', 'block_completeyourprofile'),
+				'', null, array(0, 1));
         $mform->setDefault('config_requiredonly', 0);
         $mform->setType('config_requiredonly', PARAM_RAW);
 
-        // customize block and button texts
+        // Customize block and button texts.
         $mform->addElement('text', 'config_block_text', get_string('config_block_text', 'block_completeyourprofile'));
         $mform->setDefault('config_block_text', '');
         $mform->setType('config_block_text', PARAM_RAW);

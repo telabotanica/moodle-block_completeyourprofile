@@ -13,14 +13,14 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
- 
+
 /**
  * A simple block that encourages users to complete their profile
- * 
+ *
  * Checks if all required "profile fields" (admin > users > accouts > profile fields)
  * are filled for the current user; if not, suggests him/her to take a few minutes
  * to complete his/her profile
- * 
+ *
  * English and french versions included / versions anglaise et française incluses.
  *
  * @package    block_completeyourprofile
