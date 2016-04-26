@@ -45,15 +45,15 @@ class block_completeyourprofile_edit_form extends block_edit_form {
 
         // Should we consider '' (empty string) as NULL (not filled) ?
         $mform->addElement('advcheckbox', 'config_emptyasnull',
-				get_string('consider_empty_as_null', 'block_completeyourprofile')
-				, '', null, array(0, 1));
+                get_string('consider_empty_as_null', 'block_completeyourprofile')
+                , '', null, array(0, 1));
         $mform->setDefault('config_emptyasnull', 0);
         $mform->setType('config_emptyasnull', PARAM_RAW);
 
         // Should we consider required fields only ?
         $mform->addElement('advcheckbox', 'config_requiredonly',
-				get_string('consider_required_fields_only', 'block_completeyourprofile'),
-				'', null, array(0, 1));
+                get_string('consider_required_fields_only', 'block_completeyourprofile'),
+                '', null, array(0, 1));
         $mform->setDefault('config_requiredonly', 0);
         $mform->setType('config_requiredonly', PARAM_RAW);
 
