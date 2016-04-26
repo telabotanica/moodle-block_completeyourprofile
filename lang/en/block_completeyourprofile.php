@@ -30,6 +30,7 @@
  */
 
 $string['completeyourprofile:addinstance'] = 'Add a Complete your profile block';
+$string['completeyourprofile:myaddinstance'] = 'Add a Complete your profile block to the My Moodle page';
 $string['pluginname'] = 'Complete your profile block';
 $string['block_completeyourprofile_title'] = 'Complete your profile';
 $string['complete_your_profile'] = "Thank you for taking a little time to complete your profile";

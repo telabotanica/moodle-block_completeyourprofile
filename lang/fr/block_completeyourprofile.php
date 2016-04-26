@@ -30,6 +30,7 @@
  */
 
 $string['completeyourprofile:addinstance'] = 'Ajouter un bloc Complétez votre profil';
+$string['completeyourprofile:myaddinstance'] = 'Ajouter un bloc Complétez votre profil à votre Tableau de bord';
 $string['pluginname'] = 'Bloc Complétez votre profil';
 $string['block_completeyourprofile_title'] = 'Complétez votre profil';
 $string['complete_your_profile'] = "Merci de prendre quelques instants pour compléter votre profil";
