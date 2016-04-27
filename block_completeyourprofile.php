@@ -72,7 +72,7 @@ class block_completeyourprofile extends block_base {
         $profileiscomplete = true;
         $str = "";
 
-        if ($USER->id == 1) { // Guest user
+        if (!isloggedin() or isguestuser()) { // Guest user
             // No content will make the block disappear.
             return '';
         }
