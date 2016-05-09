@@ -46,7 +46,7 @@ $settings->add(new admin_setting_heading(
 ));
 
 // Should we consider '' (empty string) as NULL (not filled) ?
-$settings->add(new admin_setting_configcheckbox_with_advanced(
+$settings->add(new admin_setting_configcheckbox(
     'completeyourprofile/Consider_Empty_As_Null',
     get_string('consider_empty_as_null', 'block_completeyourprofile'),
     get_string('consider_empty_as_null_desc', 'block_completeyourprofile'),
@@ -54,7 +54,7 @@ $settings->add(new admin_setting_configcheckbox_with_advanced(
 ));
 
 // Should we consider required fields only ?
-$settings->add(new admin_setting_configcheckbox_with_advanced(
+$settings->add(new admin_setting_configcheckbox(
     'completeyourprofile/Consider_Required_Fields_Only',
     get_string('consider_required_fields_only', 'block_completeyourprofile'),
     get_string('consider_required_fields_only_desc', 'block_completeyourprofile'),
