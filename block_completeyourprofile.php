@@ -80,7 +80,7 @@ class block_completeyourprofile extends block_base {
         // Should we consider '' (empty string) as NULL (not filled) ?
         $consideremptyasnull = get_config('completeyourprofile', 'Consider_Empty_As_Null');
         $emptyfieldclause = "data IS NOT NULL";
-        if (! empty($consideremptyasnull) &&  ($consideremptyasnulll == 1)) {
+        if (! empty($consideremptyasnull) &&  ($consideremptyasnull == 1)) {
             $emptyfieldclause .= " AND data != ''";
         }
 
@@ -134,7 +134,7 @@ class block_completeyourprofile extends block_base {
         return $str;
     }
 
-    function has_config() {
+    public function has_config() {
         return true;
     }
 }
