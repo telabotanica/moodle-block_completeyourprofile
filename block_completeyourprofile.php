@@ -78,14 +78,16 @@ class block_completeyourprofile extends block_base {
         }
 
         // Should we consider '' (empty string) as NULL (not filled) ?
+        $consideremptyasnull = get_config('completeyourprofile', 'Consider_Empty_As_Null');
         $emptyfieldclause = "data IS NOT NULL";
-        if (! empty($this->config->emptyasnull) &&  ($this->config->emptyasnull == 1)) {
+        if (! empty($consideremptyasnull) &&  ($consideremptyasnulll == 1)) {
             $emptyfieldclause .= " AND data != ''";
         }
 
         // Should we consider required fields only ?
+        $considerrequiredfieldsonly = get_config('completeyourprofile', 'Consider_Required_Fields_Only');
         $where1 = "visible > 0";
-        if (! empty($this->config->requiredonly) &&  ($this->config->requiredonly == 1)) {
+        if (! empty($considerrequiredfieldsonly) &&  ($considerrequiredfieldsonly == 1)) {
             $where1 .= " AND required = 1";
         }
 
@@ -111,16 +113,18 @@ class block_completeyourprofile extends block_base {
         if (! $profileiscomplete) {
             $editprofileurl = new moodle_url('/user/edit.php', array('id' => $USER->id));
             $str .= "<p>";
-            if (! empty($this->config->block_text)) {
-                $str .= $this->config->block_text;
+            $blocktext = get_config('completeyourprofile', 'Block_Text');
+            if (! empty($blocktext)) {
+                $str .= $blocktext;
             } else {
                 $str .= get_string('complete_your_profile', 'block_completeyourprofile');
             }
             $str .= "</p>";
             $str .= "<br/>";
             $str .= '<a class="submit" href="' . $editprofileurl->out() . '">';
-            if (! empty($this->config->button_text)) {
-                $str .= $this->config->button_text;
+            $buttontext = get_config('completeyourprofile', 'Button_Text');
+            if (! empty($buttontext)) {
+                $str .= $buttontext;
             } else {
                 $str .= get_string('edit_profile', 'block_completeyourprofile');
             }
@@ -128,5 +132,9 @@ class block_completeyourprofile extends block_base {
         } // else nothing, everything is OK
 
         return $str;
+    }
+
+    function has_config() {
+        return true;
     }
 }
