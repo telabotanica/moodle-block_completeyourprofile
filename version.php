@@ -33,4 +33,4 @@ $plugin->component = 'block_completeyourprofile';
 $plugin->version = 2016050901;
 $plugin->requires = 2014111000; // Moodle v2.8.
 $plugin->maturity = MATURITY_BETA;
-$plugin->release = "0.1";
+$plugin->release = "0.2";
