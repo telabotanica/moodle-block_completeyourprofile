@@ -42,7 +42,8 @@ defined('MOODLE_INTERNAL') || die;
 // Secttings header title according to language file.
 $settings->add(new admin_setting_heading(
     'configheader',
-    get_string('blocksettings', 'block')
+    get_string('blocksettings', 'block'),
+    ''
 ));
 
 // Should we consider '' (empty string) as NULL (not filled) ?
