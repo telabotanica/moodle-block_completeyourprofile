@@ -42,11 +42,11 @@ class block_completeyourprofile extends block_base {
      * Initiates the block title
      */
     public function init() {
-        $this->title = get_string('block_completeyourprofile_title', 'block_completeyourprofile');
     }
 
     /**
      * Returns the block content
+     *
      * @return string
      */
     public function get_content() {
@@ -59,8 +59,21 @@ class block_completeyourprofile extends block_base {
         return $this->content;
     }
 
+    function get_title() {
+        return get_string('pluginname', 'block_completeyourprofile');
+    }
+
+    function applicable_formats() {
+        return array('all' => true);
+    }
+
+    function instance_allow_multiple() {
+        return false;
+    }
+
     /**
      * Generates the block content
+     *
      * @global type $USER
      * @global type $DB
      * @return string
@@ -68,26 +81,38 @@ class block_completeyourprofile extends block_base {
     protected function generate_content() {
         global $USER;
         global $DB;
-
         $profileiscomplete = true;
         $str = "";
+        $displayform = get_config('completeyourprofile', 'Display_form');
+        $hideifcomplete = get_config('completeyourprofile', 'Hide_if_complete');
+        $confirmationtext = get_config('completeyourprofile', 'Confirmation_Text');
+        $newinfosubmitted = false;
 
         if (!isloggedin() or isguestuser()) { // Guest user
             // No content will make the block disappear.
             return '';
         }
 
+        if ($displayform) {
+            $form = new \block_completeyourprofile\customfieldsform();
+            if ($usernew = $form->get_data()) {
+                $usernew->id = $USER->id;
+                profile_save_data($usernew);
+                $newinfosubmitted = true;
+            }
+        }
+
         // Should we consider '' (empty string) as NULL (not filled) ?
         $consideremptyasnull = get_config('completeyourprofile', 'Consider_Empty_As_Null');
         $emptyfieldclause = "data IS NOT NULL";
-        if (! empty($consideremptyasnull) &&  ($consideremptyasnull == 1)) {
+        if (!empty($consideremptyasnull) && ($consideremptyasnull == 1)) {
             $emptyfieldclause .= " AND data != ''";
         }
 
         // Should we consider required fields only ?
         $considerrequiredfieldsonly = get_config('completeyourprofile', 'Consider_Required_Fields_Only');
         $where1 = "visible > 0";
-        if (! empty($considerrequiredfieldsonly) &&  ($considerrequiredfieldsonly == 1)) {
+        if (!empty($considerrequiredfieldsonly) && ($considerrequiredfieldsonly == 1)) {
             $where1 .= " AND required = 1";
         }
 
@@ -110,11 +135,11 @@ class block_completeyourprofile extends block_base {
         }
 
         // So what now ?
-        if (! $profileiscomplete) {
+        if (!$profileiscomplete && !$displayform) {
             $editprofileurl = new moodle_url('/user/edit.php', array('id' => $USER->id));
             $str .= "<p>";
             $blocktext = get_config('completeyourprofile', 'Block_Text');
-            if (! empty($blocktext)) {
+            if (!empty($blocktext)) {
                 $str .= $blocktext;
             } else {
                 $str .= get_string('complete_your_profile', 'block_completeyourprofile');
@@ -123,13 +148,26 @@ class block_completeyourprofile extends block_base {
             $str .= "<br/>";
             $str .= '<a class="submit" href="' . $editprofileurl->out() . '">';
             $buttontext = get_config('completeyourprofile', 'Button_Text');
-            if (! empty($buttontext)) {
+            if (!empty($buttontext)) {
                 $str .= $buttontext;
             } else {
                 $str .= get_string('edit_profile', 'block_completeyourprofile');
             }
             $str .= "</a>";
-        } // else nothing, everything is OK
+        } else if (!$profileiscomplete && $displayform) {
+            $blocktext = get_config('completeyourprofile', 'Block_Text');
+            if (empty($blocktext)) {
+                $blocktext= get_string('complete_your_profile', 'block_completeyourprofile');
+            }
+            $str .= html_writer::div($blocktext, "completeprofileformintro");
+            $str .= $form->render();
+        } else if ($newinfosubmitted && !empty($confirmationtext)) {
+            $this->title = get_string('block_completeyourprofile_title', 'block_completeyourprofile');
+            $str .= html_writer::div($confirmationtext);
+        } else if (!$hideifcomplete) { // else nothing, everything is OK
+            $this->title = get_string('block_completeyourprofile_title', 'block_completeyourprofile');
+            $str .= html_writer::div(get_string('complete_your_profile', 'block_completeyourprofile'));
+        }
 
         return $str;
     }

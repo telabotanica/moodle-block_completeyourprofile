@@ -1,0 +1,11 @@
+div.completeprofileformintro {
+    padding-bottom: 25px;
+}
+
+
+aside.block_completeyourprofile .mform fieldset {
+    margin-left: 0;
+}
+div.form-group:last-child div.col-md-3 {
+    display: none;
+}

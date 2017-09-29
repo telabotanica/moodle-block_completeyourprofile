@@ -77,3 +77,27 @@ $settings->add(new admin_setting_configtext(
     get_string('config_button_text_desc', 'block_completeyourprofile'),
     ''
 ));
+
+// Optionally hide when all fields are complete.
+$settings->add(new admin_setting_configcheckbox(
+        'completeyourprofile/Hide_if_complete',
+        get_string('hide_if_complete_text', 'block_completeyourprofile'),
+        get_string('hide_if_complete_text_desc', 'block_completeyourprofile'),
+        false
+));
+
+// Optionally display form inline.
+$settings->add(new admin_setting_configcheckbox(
+    'completeyourprofile/Display_form',
+    get_string('display_form_text', 'block_completeyourprofile'),
+    get_string('display_form_text_desc', 'block_completeyourprofile'),
+    false
+));
+
+// Customize text shown when form is completed.
+$settings->add(new admin_setting_configtext(
+        'completeyourprofile/Confirmation_Text',
+        get_string('confirmation_text', 'block_completeyourprofile'),
+        get_string('confirmation_text_desc', 'block_completeyourprofile'),
+        get_string('confirmation_text_default', 'block_completeyourprofile')
+));
