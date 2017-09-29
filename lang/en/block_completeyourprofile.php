@@ -48,5 +48,5 @@ $string['display_form_text_desc'] = "Display form inline";
 $string['hide_if_complete_text'] = "Hide block if profile complete";
 $string['hide_if_complete_text_desc'] = "Hide block if profile complete";
 $string['confirmation_text'] = "Confirmation text";
-$string['confirmation_text_descdefault'] = "Confirmation text displayed when profile is completed";
+$string['confirmation_text_desc'] = "Confirmation text displayed when profile is completed";
 $string['confirmation_text_default'] = "Thank you for completeing your profile";
