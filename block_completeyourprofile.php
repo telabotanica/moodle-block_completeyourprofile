@@ -28,6 +28,7 @@
  * @copyright  2016 Mathias Chouet, Tela Botanica
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+defined('MOODLE_INTERNAL') || die();
 
 /**
  * Block definition
@@ -59,15 +60,15 @@ class block_completeyourprofile extends block_base {
         return $this->content;
     }
 
-    function get_title() {
+    public function get_title() {
         return get_string('pluginname', 'block_completeyourprofile');
     }
 
-    function applicable_formats() {
+    public function applicable_formats() {
         return array('all' => true);
     }
 
-    function instance_allow_multiple() {
+    public function instance_allow_multiple() {
         return false;
     }
 
@@ -157,14 +158,14 @@ class block_completeyourprofile extends block_base {
         } else if (!$profileiscomplete && $displayform) {
             $blocktext = get_config('completeyourprofile', 'Block_Text');
             if (empty($blocktext)) {
-                $blocktext= get_string('complete_your_profile', 'block_completeyourprofile');
+                $blocktext = get_string('complete_your_profile', 'block_completeyourprofile');
             }
             $str .= html_writer::div($blocktext, "completeprofileformintro");
             $str .= $form->render();
         } else if ($newinfosubmitted && !empty($confirmationtext)) {
             $this->title = get_string('block_completeyourprofile_title', 'block_completeyourprofile');
             $str .= html_writer::div($confirmationtext);
-        } else if (!$hideifcomplete) { // else nothing, everything is OK
+        } else if (!$hideifcomplete) { // Else nothing, everything is OK.
             $this->title = get_string('block_completeyourprofile_title', 'block_completeyourprofile');
             $str .= html_writer::div(get_string('complete_your_profile', 'block_completeyourprofile'));
         }
