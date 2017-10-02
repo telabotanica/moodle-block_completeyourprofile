@@ -38,6 +38,7 @@ class customfieldsform extends \moodleform {
     public function definition() {
         global $USER, $DB;
         $config = $this->_customdata['config'];
+        $courseid = $this->_customdata['courseid'];
 
         $buttontext = get_config('completeyourprofile', 'Button_Text');
         if (empty($buttontext)) {
@@ -47,10 +48,17 @@ class customfieldsform extends \moodleform {
         $mform =& $this->_form;
         profile_definition($mform);
 
+        $mform->addElement('hidden', 'id', $courseid);
+        $mform->setType('id', PARAM_INT);
+
         if (!empty($config->ignorefields)) {
             $fields = $DB->get_records_list('user_info_field', 'id', $config->ignorefields);
             foreach ($fields as $field) {
                 $inputname = 'profile_field_' . $field->shortname;
+
+                if (!isset($mform->_elementIndex[$inputname])) {
+                    continue;
+                }
                 $elemindex = $mform->_elementIndex[$inputname];
                 $elem = $mform->_elements[$elemindex];
                 $mform->removeElement($elem->getName());

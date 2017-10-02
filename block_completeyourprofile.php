@@ -65,7 +65,7 @@ class block_completeyourprofile extends block_base {
     }
 
     public function applicable_formats() {
-        return array('all' => true);
+        return array('site' => true, 'course' => true, 'my' => true);
     }
 
     public function instance_allow_multiple() {
@@ -95,7 +95,7 @@ class block_completeyourprofile extends block_base {
         }
 
         if ($displayform) {
-            $form = new \block_completeyourprofile\customfieldsform(null, ['config' => $this->config]);
+            $form = new \block_completeyourprofile\customfieldsform(null, ['config' => $this->config, 'courseid' => $this->page->course->id]);
             if ($usernew = $form->get_data()) {
                 $usernew->id = $USER->id;
                 profile_save_data($usernew);
