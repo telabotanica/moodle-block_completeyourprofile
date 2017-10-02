@@ -95,7 +95,7 @@ class block_completeyourprofile extends block_base {
         }
 
         if ($displayform) {
-            $form = new \block_completeyourprofile\customfieldsform();
+            $form = new \block_completeyourprofile\customfieldsform(null, ['config' => $this->config]);
             if ($usernew = $form->get_data()) {
                 $usernew->id = $USER->id;
                 profile_save_data($usernew);
@@ -103,6 +103,7 @@ class block_completeyourprofile extends block_base {
             }
         }
 
+        $params = [];
         // Should we consider '' (empty string) as NULL (not filled) ?
         $consideremptyasnull = get_config('completeyourprofile', 'Consider_Empty_As_Null');
         $emptyfieldclause = "data IS NOT NULL";
@@ -116,9 +117,18 @@ class block_completeyourprofile extends block_base {
         if (!empty($considerrequiredfieldsonly) && ($considerrequiredfieldsonly == 1)) {
             $where1 .= " AND required = 1";
         }
+        if (!empty($this->config->ignorefields)) {
+            list($insql, $inparams) = $DB->get_in_or_equal(array_values($this->config->ignorefields), SQL_PARAMS_NAMED, 'param', false);
+            $inparams;
+        } else {
+            $insql = '';
+            $inparams = [];
+        }
 
         // Which fields are supposed to be filled ?
-        $fieldstofill = $DB->get_records_select('user_info_field', $where1, null, '', 'id');
+        $where1 .= " AND id $insql ";
+        $params += $inparams;
+        $fieldstofill = $DB->get_records_select('user_info_field', $where1, $params, '', 'id');
 
         if (count($fieldstofill) > 0) {
             // Get desired fields IDs.

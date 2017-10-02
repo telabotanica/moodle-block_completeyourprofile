@@ -32,11 +32,12 @@
 namespace block_completeyourprofile;
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->libdir.'/formslib.php');
+require_once($CFG->libdir . '/formslib.php');
 
 class customfieldsform extends \moodleform {
     public function definition() {
-        global $USER;
+        global $USER, $DB;
+        $config = $this->_customdata['config'];
 
         $buttontext = get_config('completeyourprofile', 'Button_Text');
         if (empty($buttontext)) {
@@ -45,10 +46,20 @@ class customfieldsform extends \moodleform {
 
         $mform =& $this->_form;
         profile_definition($mform);
+
+        if (!empty($config->ignorefields)) {
+            $fields = $DB->get_records_list('user_info_field', 'id', $config->ignorefields);
+            foreach ($fields as $field) {
+                $inputname = 'profile_field_' . $field->shortname;
+                $elemindex = $mform->_elementIndex[$inputname];
+                $elem = $mform->_elements[$elemindex];
+                $mform->removeElement($elem->getName());
+            }
+        }
+
         $this->add_action_buttons(false, $buttontext);
         $this->set_data($USER);
     }
-
 
     public function definition_after_data() {
         global $USER;

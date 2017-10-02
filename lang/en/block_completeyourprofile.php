@@ -50,3 +50,4 @@ $string['hide_if_complete_text_desc'] = "Hide block if profile complete";
 $string['confirmation_text'] = "Confirmation text";
 $string['confirmation_text_desc'] = "Confirmation text displayed when profile is completed";
 $string['confirmation_text_default'] = "Thank you for completeing your profile";
+$string['ignorefields'] = 'Fields to ignore';

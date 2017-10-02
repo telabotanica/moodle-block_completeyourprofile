@@ -6,7 +6,7 @@ div.completeprofileformintro {
 aside.block_completeyourprofile .mform fieldset {
     margin-left: 0;
 }
-div.form-group:last-child div.col-md-3 {
+aside.block_completeyourprofile form > div.form-group:last-child div.col-md-3 {
     display: none;
 }
 aside.block_completeyourprofile div.form-group div.col-md-3 {
