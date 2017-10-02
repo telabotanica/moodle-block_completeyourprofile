@@ -66,7 +66,11 @@ class customfieldsform extends \moodleform {
         }
 
         $this->add_action_buttons(false, $buttontext);
-        $this->set_data($USER);
+
+        $defaults = (array)$USER;
+        $defaults['id'] = $courseid;
+
+        $this->set_data($defaults);
     }
 
     public function definition_after_data() {
