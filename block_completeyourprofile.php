@@ -94,6 +94,10 @@ class block_completeyourprofile extends block_base {
         // Which fields are supposed to be filled ?
         $fieldstofill = $DB->get_records_select('user_info_field', $where1, null, '', 'id');
 
+        // Should we check for user picture / interests ?
+        $checkforuserpicture = get_config('completeyourprofile', 'check_for_user_picture');
+        $checkforinterests = get_config('completeyourprofile', 'check_for_interests');
+
         if (count($fieldstofill) > 0) {
             // Get desired fields IDs.
             $ftfids = array();
@@ -105,6 +109,22 @@ class block_completeyourprofile extends block_base {
             $nbfilledfields = $DB->count_records_select('user_info_data', $where2, null, 'COUNT(*)');
             // Compare results
             if ($nbfilledfields < count($ftfids)) {
+                $profileiscomplete = false;
+            }
+        }
+
+        if ($checkforuserpicture) {
+            // Check for picture.
+            $haspicture = $DB->get_field('user', 'picture', array('id' => $USER->id) );
+            if ($haspicture < 1) {
+                $profileiscomplete = false;
+            }
+        }
+
+        if ($checkforinterests) {
+            // Check for tags.
+            $hastags = $DB->count_records('tag_instance', array('itemtype' => 'user', 'itemid' => $USER->id) );
+            if ($hastags < 1) {
                 $profileiscomplete = false;
             }
         }
