@@ -25,14 +25,28 @@
  *
  * @package    block_completeyourprofile
  * @category   blocks
- * @copyright  2016 Mathias Chouet, Tela Botanica
+ * @copyright  2017 Andrew Hancox <andrewdchancox@googlemail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'block_completeyourprofile';
-$plugin->version = 2016051802;
-$plugin->requires = 2014111000; // Moodle v2.8.
-$plugin->maturity = MATURITY_BETA;
-$plugin->release = "0.2";
+require_once($CFG->libdir.'/formslib.php');
+
+class block_completeyourprofile_edit_form extends \block_edit_form {
+
+    protected function specific_definition($mform) {
+        global $DB;
+
+        // Section header title according to language file.
+        $mform->addElement('header', 'configheader', get_string('blocksettings', 'block'));
+
+        $fieldstofill = $DB->get_records_menu('user_info_field', [], null, 'id,name');
+
+        $mform->addElement('select', 'config_ignorefields', get_string('ignorefields', 'block_completeyourprofile'), $fieldstofill, ['multiple' => true]);
+
+        $mform->setDefault('config_text', 'default value');
+        $mform->setType('config_text', PARAM_INT);
+
+    }
+}
