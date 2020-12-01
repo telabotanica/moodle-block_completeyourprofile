@@ -62,6 +62,22 @@ $settings->add(new admin_setting_configcheckbox(
     '0'
 ));
 
+// Should we check for a user picture ?
+$settings->add(new admin_setting_configcheckbox(
+    'completeyourprofile/check_for_user_picture',
+    get_string('check_for_user_picture', 'block_completeyourprofile'),
+    get_string('check_for_user_picture_desc', 'block_completeyourprofile'),
+    '0'
+));
+
+// Should we check for interests ?
+$settings->add(new admin_setting_configcheckbox(
+    'completeyourprofile/check_for_interests',
+    get_string('check_for_interests', 'block_completeyourprofile'),
+    get_string('check_for_interests_desc', 'block_completeyourprofile'),
+    '0'
+));
+
 // Customize block and button texts.
 $settings->add(new admin_setting_configtextarea(
     'completeyourprofile/Block_Text',
